@@ -1,0 +1,19 @@
+<h3>Home of Archive<h3>
+
+<ul>
+  <li routerLinkActive="active current"><a [routerLink]="['/archiveFile','July',2017]"
+   >july/2017</a></li>
+  <li routerLinkActive="active current" ><a [routerLink]="['/archiveFile','Aug', 2017]">aug/2017</a></li>
+  <li routerLinkActive="active current"><a [routerLink]="['/archiveFile','Sep',2017]">sep/2017</a></li>
+</ul>
+
+<form action="">
+  <div class = "form-group">
+<label for="password">Enter Password to enter Archive</label>
+<br> 
+<input ngModel  name = "password" class = "form-control" type="text" value="" id ="password" (keyup)="onKey($event);sendValueIntoService()">
+</div>
+
+</form>
+<button (click) = "show()">show Details</button>
+<router-outlet></router-outlet>  

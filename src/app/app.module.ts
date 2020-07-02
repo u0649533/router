@@ -29,7 +29,11 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { GithubProfileComponent } from './github-profile/github-profile.component';
-import { NotFoundComponent } from './not-found/not-found.component'; 
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ArchiveComponent } from './archive/archive.component';
+import { ArchiveFileComponent } from './archive-file/archive-file.component'; 
+import { MyGuardGuard } from './my-guard.guard';
+import { ArchiveFileChildComponent } from './archive-file-child/archive-file-child.component';
 
 @NgModule({
   declarations: [
@@ -54,18 +58,36 @@ import { NotFoundComponent } from './not-found/not-found.component';
     HomeComponent,
     GithubProfileComponent,
     NotFoundComponent,
+    ArchiveComponent,
+    ArchiveFileComponent,
+    ArchiveFileChildComponent
+    
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      {path: '', component:HomeComponent},
+      {path: 'followers/:id/:username', component: GithubProfileComponent},
+      {path: 'followers', component: GithubFollowersComponent},
+      {path: 'posts', component: PostsComponent, 
+      children: [{path:'archiveDetail', component: ArchiveFileChildComponent }]},
+      {path: 'archive', component: ArchiveComponent, canActivate: [MyGuardGuard],
+      children: [{path:'archiveDetail', component: ArchiveFileChildComponent }]},
+      {path: 'archiveFile/:month/:year', component: ArchiveFileComponent, canActivate: [MyGuardGuard]},
+      {path: '**', component: NotFoundComponent},
+
+    ])
   ],
   providers: [
     PostService,
     CoursesService,
     AuthorsService,
     GithubFollowersService,
+    MyGuardGuard,
     { provide: ErrorHandler, useClass: AppErrorHandler }
   ],
   bootstrap: [AppComponent]

@@ -3,6 +3,7 @@ import { BadInput } from './../common/bad-input';
 import { AppError } from './../common/app-error';
 import { PostService } from './../services/post.service';
 import { Component, OnInit } from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-posts',
@@ -11,8 +12,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
   posts: any[];
+  
 
-  constructor(private service: PostService) {
+  constructor(private service: PostService, private router:Router, private route: ActivatedRoute) {
+  }
+
+  flag = true;
+  show(){
+    if(this.flag){
+    this.router.navigate(['archiveDetail'],{relativeTo: this.route});
+  }else{
+    this.router.navigate(['posts']);}
+    this.flag = !this.flag;
   }
 
   ngOnInit() {

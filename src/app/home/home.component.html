@@ -1,3 +1,12 @@
-<p>
-  home works!
-</p>
+<h3>
+ Welcome
+</h3>
+
+<form action="">
+  <div class = "form-group">
+<label for="password">Enter Password to enter Archive</label>
+<br> 
+<input ngModel  name = "password" class = "form-control" type="text" value="" id ="password" (keyup)="onKey($event);sendValueIntoService()">
+</div>
+
+</form>
